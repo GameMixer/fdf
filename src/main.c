@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:08:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/13 16:21:18 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/17 17:03:29 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Zoom:\n\
 	IN: Keypad: +\n\
 	OUT: Keypad: -\n\
 ____________________________\n\
-");	
+");
 }
 
 int		main(int argc, char **argv)
@@ -49,7 +49,7 @@ int		main(int argc, char **argv)
 		get_center(screen);
 		display_controls();
 		draw_win("42 FDF", WIN_W, WIN_H, screen);
-		//adapt_map(screen);
+		adapt_map(screen);
 		mlx_expose_hook(screen->win, draw_reload, screen);
 		mlx_hook(screen->win, 2, 3, key_hook, screen);
 		mlx_loop(screen->mlx);

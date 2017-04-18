@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 15:05:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/13 16:45:27 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/17 17:03:05 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,35 +67,30 @@ int		draw_reload(t_win *screen)
 	return (0);
 }
 
-#include <stdio.h>
-
 void	adapt_map(t_win *screen)
 {
 	int		w;
 	int		h;
 	double	s;
 
-	printf("Creating the width of the window...\n");
-	w = (WIN_W + 100) / 2;
-	printf("Creating the height of the window...\n");
-	h = (WIN_H + 100) / 2;
-	printf("Done. Width is %d and Height is %d. Checking center value...\n", w, h);
+	w = (WIN_W) / 2;
+	h = (WIN_H) / 2;
 	if (screen->center.x == 0)
 		screen->center.x = 10;
-	printf("Center value is %f. Calculating scale...\n", (screen->center.x));
-	s = (w - 600) / (screen->center.x);
-	printf("Scale is %f...\n", s);
-	printf("Width, Height, center, and scale work. The problem must be the 2 functions below...\n");
+	if (screen->center.y == 0)
+		screen->center.y = 10;
+	if (((screen->center.y) / (screen->center.x)) <= (WIN_H / WIN_W))
+		s = w / (screen->center.x);
+	else
+		s = h / (screen->center.y);
 	calc_shift(screen, -screen->center.x + w, -screen->center.y + h, 0);
-	printf("Shift worked. Checking scale...\n");
 	calc_scale(screen, s);
-	printf("Both seem to work. Not likely to get to this point.\n");
 }
 
 int		out_window(t_point *point)
 {
-	if (!(point->x > WIN_W + TRANS_DIST || point->x <= 0 ||
-				point->y > WIN_H + TRANS_DIST || point->y <= 0))
+	if (!(point->x > WIN_W + SHIFT_DIST || point->x <= 0 ||
+				point->y > WIN_H + SHIFT_DIST || point->y <= 0))
 		return (1);
 	else
 		return (0);

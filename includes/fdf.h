@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:19:16 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/13 17:05:36 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/17 17:04:53 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 /*
 ** Move pixel
 */
-# define TRANS_DIST 100
-# define MOVE_UP -TRANS_DIST
-# define MOVE_DOWN TRANS_DIST
-# define MOVE_LEFT -TRANS_DIST
-# define MOVE_RIGHT TRANS_DIST
+# define SHIFT_DIST 100
+# define MOVE_UP -SHIFT_DIST
+# define MOVE_DOWN SHIFT_DIST
+# define MOVE_LEFT -SHIFT_DIST
+# define MOVE_RIGHT SHIFT_DIST
 
 # define ZOOM_AMOUNT 0.1
 # define SCALE 1.0
@@ -63,10 +63,10 @@
 # define KEY_ZOOM_OUT 78
 # define KEY_ALT_ZOOM_OUT 27
 
-# define KEY_ROT_X_U 2
-# define KEY_ROT_X_D 0
-# define KEY_ROT_Y_U 13
-# define KEY_ROT_Y_D 1
+# define KEY_ROT_X_U 1
+# define KEY_ROT_X_D 13
+# define KEY_ROT_Y_U 2
+# define KEY_ROT_Y_D 0
 # define KEY_ROT_Z_U 14
 # define KEY_ROT_Z_D 12
 
@@ -132,17 +132,17 @@ typedef struct	s_matrix
 }				t_matrix;
 
 /*
- *	Parse argument and create a map
- *		parse_arg.c
- */
+**	Parse argument and create a map
+**		parse_arg.c
+*/
 t_map			*ft_parse_map(char *av, int fd);
 int				ft_row_num(char *map);
 int				ft_points(char *line, int nb_line, t_point ***array_points);
 
 /*
- *	Draw the map
- *		draw.c
- */
+**	Draw the map
+**		draw.c
+*/
 void			draw_win(char *title, int width, int height, t_win *screen);
 void			draw_params(t_point *p1, t_point *p2, double *params);
 void			draw_point(t_point *point, t_win *screen, int color);
@@ -150,19 +150,19 @@ void			draw_line(t_point p1, t_point p2, t_win *screen);
 void			draw_map(t_win *screen);
 
 /*
- * This is for when it detects a key has been pressed, and...
- * ...does stuff with it.
- * 	key_hook.c
- */
+** This is for when it detects a key has been pressed, and...
+** ...does stuff with it.
+** 	key_hook.c
+*/
 int				key_hook(int keycode, t_win *screen);
 void			key_hook_rotation(int keycode, t_win *screen);
 void			key_hook_shift(int keycode, t_win *screen);
 void			key_hook_scale(int keycode, t_win *screen);
 
 /*
- * This to do MATHS!!!
- * 	calc.c
- */
+** This to do MATHS!!!
+** 	calc.c
+*/
 void			calc_point(t_point *p, t_matrix *m, t_win *screen);
 void			calc_all_points(t_matrix *m, t_win *screen);
 void			calc_rotation(t_win *screen, double rot, char axis);
@@ -170,10 +170,10 @@ void			calc_shift(t_win *screen, double x, double y, double z);
 void			calc_scale(t_win *screen, double scale);
 
 /*
- *	Not the movie Matrix, but the math term Matrix, which is used to rotate
- *	and change the map scale...Less exciting kind of Matrix...sorry.
- *		matrix.c
- */
+**	Not the movie Matrix, but the math term Matrix, which is used to rotate
+**	and change the map scale...Less exciting kind of Matrix...sorry.
+**		matrix.c
+*/
 t_matrix		*matrix_rotation_x(double theta);
 t_matrix		*matrix_rotation_y(double theta);
 t_matrix		*matrix_rotation_z(double theta);
@@ -181,18 +181,18 @@ t_matrix		*matrix_shift(double tx, double ty, double tz);
 t_matrix		*matrix_scale(double scale);
 
 /*
- *	Error display
- *		error.c
- */
+**	Error display
+**		error.c
+*/
 void			fdf_malloc_error(void);
 void			fdf_map_error(void);
 void			fdf_arg_error(void);
 
 /*
- *	Other functions that are in a file that I have very little imagination
- *	to name it with, so it will stay this way. I'm not good with names...
- *		util.c
- */
+**	Other functions that are in a file that I have very little imagination
+**	to name it with, so it will stay this way. I'm not good with names...
+**		util.c
+*/
 void			get_center(t_win *screen);
 int				get_color(t_point *p1, t_point *p2);
 void			adapt_map(t_win *screen);
