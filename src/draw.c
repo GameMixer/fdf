@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 14:06:14 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/13 14:10:41 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/18 16:36:46 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	draw_line(t_point p1, t_point p2, t_win *screen)
 		while (flag && !((int)p1.x == (int)p2.x && (int)p1.y == (int)p2.y))
 		{
 			if (out_window(&p1) == 1)
-				draw_point(&p1, screen, get_color(&p1, &p2));
+				draw_point(&p1, screen, get_color(screen, &p1));
+				//draw_point(&p1, screen, get_color(&p1, &p2));
 			params[5] = params[4];
 			flag = 0;
 			if (params[5] > -params[0] && (int)p1.x != (int)p2.x)

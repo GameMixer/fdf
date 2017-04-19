@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:52:00 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/13 11:11:12 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/18 15:10:21 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_map	*ft_parse_map(char *av, int fd)
 	t_point	**array_points;
 
 	count = 0;
-	if (!(map = (t_map *)malloc(sizeof(t_map))) ||
+	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))) ||
 			!(map->lines = (t_line **)malloc(sizeof(t_line) * ft_row_num(av))))
 		fdf_malloc_error();
 	map->len = 0;
@@ -79,10 +79,10 @@ t_map	*ft_parse_map(char *av, int fd)
 				fdf_malloc_error();
 			row->len = ft_points(line, count, &array_points);
 			row->points = array_points;
-			map->lines[count] = row;
-			count++;
+			map->lines[count++] = row;
 		}
 		map->len = count;
+		get_min_max(map);
 	}
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:19:16 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/17 17:04:53 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/18 17:23:12 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,23 @@
 /*
 ** Colors
 */
+# define TEAL 0x6CD2A6
 # define PURPLE 0xB200FF
 # define BLUE 0x0041FF
 # define BROWN 0xAD4F09
 # define GREEN 0x25FF50
-# define RED 0xE24C31
+# define RED 0xDB3315
 # define ORANGE 0xFFAF00
+# define YELLOW 0xFFE819
 # define WHITE 0xFFFFFF
+# define GRAY 0x808080
 # define BLACK 0x000000
+
+typedef struct	s_color
+{
+	int			c1;
+	int			c2;
+}				t_color;
 
 typedef struct	s_point
 {
@@ -100,6 +109,9 @@ typedef struct	s_map
 {
 	t_line		**lines;
 	int			len;
+	double		min;
+	double		max;
+	double		mid;
 }				t_map;
 
 typedef struct	s_window
@@ -109,6 +121,8 @@ typedef struct	s_window
 	t_map		*map;
 	void		*img;
 	t_point		center;
+	int			**color;
+	int			cnum;
 	char		*img_addr;
 	int			bits;
 	int			size;
@@ -148,6 +162,16 @@ void			draw_params(t_point *p1, t_point *p2, double *params);
 void			draw_point(t_point *point, t_win *screen, int color);
 void			draw_line(t_point p1, t_point p2, t_win *screen);
 void			draw_map(t_win *screen);
+
+/*
+**	Make the map pretty with colors!!! Yay!!!
+**		color.c
+*/
+void			get_min_max(t_map *map);
+int				find_color(t_color *spectrum, int z, double min, double max);
+int				get_color(t_win *screen, t_point *p1);
+int				*put_color(int a, int b, int c);
+int				**choose_color(void);
 
 /*
 ** This is for when it detects a key has been pressed, and...
@@ -194,7 +218,7 @@ void			fdf_arg_error(void);
 **		util.c
 */
 void			get_center(t_win *screen);
-int				get_color(t_point *p1, t_point *p2);
+//int				get_color(t_point *p1, t_point *p2);
 void			adapt_map(t_win *screen);
 int				draw_reload(t_win *screen);
 int				out_window(t_point *point);

@@ -6,7 +6,7 @@
 #    By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/28 19:09:15 by gderenzi          #+#    #+#              #
-#    Updated: 2017/04/12 17:43:11 by gderenzi         ###   ########.fr        #
+#    Updated: 2017/04/18 16:37:31 by gderenzi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAGS		= -Wall -Werror -Wextra
 SRC			= main.c \
 			  parse_arg.c \
 			  draw.c \
+			  color.c \
 			  key_hook.c \
 			  calc.c \
 			  matrix.c \

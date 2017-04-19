@@ -6,12 +6,12 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 15:05:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/17 17:03:05 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/18 17:40:01 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*
 int		get_color(t_point *p1, t_point *p2)
 {
 	int	color;
@@ -39,6 +39,7 @@ int		get_color(t_point *p1, t_point *p2)
 		color = BLACK;
 	return (color);
 }
+*/
 
 void	get_center(t_win *screen)
 {
