@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 17:13:39 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/13 17:06:46 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:11:21 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,33 @@ void	key_hook_shift(int keycode, t_win *screen)
 void	key_hook_scale(int keycode, t_win *screen)
 {
 	if (keycode == KEY_ZOOM_IN || keycode == KEY_ALT_ZOOM_IN)
+	{
 		calc_scale(screen, MOVE_ZOOM_IN);
+		screen->scale *= MOVE_ZOOM_IN;
+	}
 	else if (keycode == KEY_ZOOM_OUT || keycode == KEY_ALT_ZOOM_OUT)
+	{
 		calc_scale(screen, MOVE_ZOOM_OUT);
+		screen->scale *= MOVE_ZOOM_OUT;
+	}
+}
+
+void	key_hook_color(int keycode, t_win *screen)
+{
+	if (keycode == KEY_COLOR_U)
+	{
+		if (screen->cnum < THEMES - 1)
+			screen->cnum++;
+		else
+			screen->cnum = 0;
+	}
+	else if (keycode == KEY_COLOR_D)
+	{
+		if (screen->cnum > 0)
+			screen->cnum--;
+		else
+			screen->cnum = THEMES - 1;
+	}
 }
 
 int		key_hook(int keycode, t_win *screen)
@@ -58,6 +82,7 @@ int		key_hook(int keycode, t_win *screen)
 	key_hook_rotation(keycode, screen);
 	key_hook_shift(keycode, screen);
 	key_hook_scale(keycode, screen);
+	key_hook_color(keycode, screen);
 	draw_reload(screen);
 	return (0);
 }

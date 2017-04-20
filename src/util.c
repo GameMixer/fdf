@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 15:05:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/18 17:40:01 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:02:26 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ int		get_color(t_point *p1, t_point *p2)
 	return (color);
 }
 */
+
+char	*theme(int i)
+{
+	if (i == 0)
+		return ("Black to white");
+	if (i == 1)
+		return ("RGB");
+	if (i == 2)
+		return ("Lava");
+	if (i == 3)
+		return ("Red to white");
+	if (i == 4)
+		return ("Island");
+	return ("Mountain");
+}
 
 void	get_center(t_win *screen)
 {
@@ -86,6 +101,7 @@ void	adapt_map(t_win *screen)
 		s = h / (screen->center.y);
 	calc_shift(screen, -screen->center.x + w, -screen->center.y + h, 0);
 	calc_scale(screen, s);
+	screen->scale = s;
 }
 
 int		out_window(t_point *point)

@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 14:42:20 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/18 17:28:07 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:02:20 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,31 @@ int		find_color(t_color *spectrum, int z, double min, double max)
 	return (color);
 }
 
-int		get_color(t_win *screen, t_point *p1)
+int		get_color(t_win *screen, int color, t_point *p1)
 {
 	t_color	c;
+	//int		color;
 
-	if (p1->color < screen->map->min || p1->color > screen->map->max)
-		return (0);
-	if (p1->color <= screen->map->mid && p1->color >= screen->map->min)
+	if (out_window(p1) == 1)
 	{
-		c.c1 = screen->color[screen->cnum][0];
-		c.c2 = screen->color[screen->cnum][1];
-		return (find_color(&c, p1->color, screen->map->min, screen->map->mid));
-	}
-	else if (p1->color <= screen->map->max && p1->color >= screen->map->mid)
-	{
-		c.c1 = screen->color[screen->cnum][1];
-		c.c2 = screen->color[screen->cnum][2];
-		return (find_color(&c, p1->color, screen->map->mid, screen->map->max));
+		//if (p2->color > p1->color)
+		//	color = p2->color;
+		//else
+		//	color = p1->color;
+		if (color < screen->map->min || color > screen->map->max)
+			return (0);
+		if (color <= screen->map->mid && color >= screen->map->min)
+		{
+			c.c1 = screen->color[screen->cnum][0];
+			c.c2 = screen->color[screen->cnum][1];
+			return (find_color(&c, color, screen->map->min, screen->map->mid));
+		}
+		else if (color <= screen->map->max && color >= screen->map->mid)
+		{
+			c.c1 = screen->color[screen->cnum][1];
+			c.c2 = screen->color[screen->cnum][2];
+			return (find_color(&c, color, screen->map->mid, screen->map->max));
+		}
 	}
 	return (0);
 }
@@ -100,8 +108,11 @@ int		**choose_color(void)
 {
 	int		**color;
 
-	color = malloc(sizeof(int *) * 2);
+	color = malloc(sizeof(int *) * THEMES);
 	color[0] = put_color(BLACK, GRAY, WHITE);
-	color[1] = put_color(RED, ORANGE, YELLOW);
+	color[1] = put_color(BLUE, LIME, RED);
+	color[2] = put_color(RED, ORANGE, YELLOW);
+	color[3] = put_color(RED, PINK, WHITE);
+	color[4] = put_color(SCIBLUE, DEEPSKYBLUE, CREAMCAN);
 	return (color);
 }

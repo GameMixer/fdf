@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 14:06:14 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/18 16:36:46 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:19:54 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	draw_params(t_point *p1, t_point *p2, double *params)
 		params[4] = params[0] * 0.5;
 	else
 		params[4] = -params[2] * 0.5;
+	params[6] = p1->color;
+	params[7] = ((p1->color < p2->color) * 2) - 1;
 }
 
 void	draw_point(t_point *point, t_win *screen, int color)
@@ -39,7 +41,7 @@ void	draw_point(t_point *point, t_win *screen, int color)
 
 void	draw_line(t_point p1, t_point p2, t_win *screen)
 {
-	double	params[6];
+	double	params[8];
 	int		flag;
 
 	draw_params(&p1, &p2, params);
@@ -47,9 +49,10 @@ void	draw_line(t_point p1, t_point p2, t_win *screen)
 	if (out_window(&p1) || out_window(&p2))
 		while (flag && !((int)p1.x == (int)p2.x && (int)p1.y == (int)p2.y))
 		{
-			if (out_window(&p1) == 1)
-				draw_point(&p1, screen, get_color(screen, &p1));
-				//draw_point(&p1, screen, get_color(&p1, &p2));
+			draw_point(&p1, screen, get_color(screen, (int)params[6], &p1));
+			if (screen->scale)
+				params[6] += (1 / screen->scale) * params[7];
+			//draw_point(&p1, screen, get_color(&p1, &p2));
 			params[5] = params[4];
 			flag = 0;
 			if (params[5] > -params[0] && (int)p1.x != (int)p2.x)

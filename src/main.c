@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:08:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/18 17:29:49 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/19 12:54:52 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		main(int argc, char **argv)
 		screen->map = map;
 		get_center(screen);
 		screen->color = choose_color();
-		screen->cnum = 1;
+		screen->cnum = 2;
 		display_controls();
 		draw_win("42 FDF", WIN_W, WIN_H, screen);
 		adapt_map(screen);

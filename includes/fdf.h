@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:19:16 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/18 17:23:12 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:01:49 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,46 @@
 # define KEY_ROT_Z_U 14
 # define KEY_ROT_Z_D 12
 
+# define KEY_COLOR_U 47
+# define KEY_COLOR_D 43
+
 /*
 ** Colors
 */
-# define TEAL 0x6CD2A6
-# define PURPLE 0xB200FF
-# define BLUE 0x0041FF
-# define BROWN 0xAD4F09
-# define GREEN 0x25FF50
-# define RED 0xDB3315
-# define ORANGE 0xFFAF00
-# define YELLOW 0xFFE819
+# define TEAL 0x008080
+# define CYAN 0x00FFFF
+# define PURPLE 0x800080
+# define INDIGO 0x4B0082
+# define MAGENTA 0xFF00FF
+# define DEEPSKYBLUE 0x00BFFF
+# define BLUE 0x0000FF
+# define SCIBLUE 0x0066CC
+# define NAVY 0x000080
+# define BROWN 0xA52A2A
+# define TAN 0xD2B48C
+# define PINK 0xFFC0CB
+# define HOTPINK 0xFF69B4
+# define RED 0xFF0000
+# define CRIMSON 0xDC143C
+# define MAROON 0x800000
+# define ORANGERED 0xFF4500
+# define ORANGE 0xFF8000
+# define CREAMCAN 0xF3D85E
+# define YELLOW 0xFFFF00
+# define TURQUOISE 0x40E0D0
+# define AQUAMARINE 0x7FFFD4
+# define EMERALD 0x00C957
+# define MINT 0xBDFCC9
+# define OLIVE 0x808000
+# define LIME 0x00FF00
+# define GREEN 0x008000
+# define IVORYBLACK 0x292421
 # define WHITE 0xFFFFFF
+# define SILVER 0xC0C0C0
 # define GRAY 0x808080
 # define BLACK 0x000000
+
+# define THEMES 5
 
 typedef struct	s_color
 {
@@ -123,6 +149,7 @@ typedef struct	s_window
 	t_point		center;
 	int			**color;
 	int			cnum;
+	double		scale;
 	char		*img_addr;
 	int			bits;
 	int			size;
@@ -169,7 +196,7 @@ void			draw_map(t_win *screen);
 */
 void			get_min_max(t_map *map);
 int				find_color(t_color *spectrum, int z, double min, double max);
-int				get_color(t_win *screen, t_point *p1);
+int				get_color(t_win *screen, int color, t_point *p1);
 int				*put_color(int a, int b, int c);
 int				**choose_color(void);
 
@@ -182,6 +209,7 @@ int				key_hook(int keycode, t_win *screen);
 void			key_hook_rotation(int keycode, t_win *screen);
 void			key_hook_shift(int keycode, t_win *screen);
 void			key_hook_scale(int keycode, t_win *screen);
+void			key_hook_color(int keycode, t_win *screen);
 
 /*
 ** This to do MATHS!!!
