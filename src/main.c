@@ -6,32 +6,11 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:08:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/19 12:54:52 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/20 14:18:45 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	display_controls(void)
-{
-	ft_putstr("\
-____________________________\n\
-CONTROLS:\n\
-Translation:\n\
-	Y: Key: UP, DOWN\n\
-	X: Key: LEFT, RIGHT\n\
-\n\
-Rotation:\n\
-	X: A, D\n\
-	Y: S, W\n\
-	Z: Q, E\n\
-\n\
-Zoom:\n\
-	IN: Keypad: +\n\
-	OUT: Keypad: -\n\
-____________________________\n\
-");
-}
 
 int		main(int argc, char **argv)
 {
@@ -48,8 +27,7 @@ int		main(int argc, char **argv)
 		screen->map = map;
 		get_center(screen);
 		screen->color = choose_color();
-		screen->cnum = 2;
-		display_controls();
+		screen->cnum = 0;
 		draw_win("42 FDF", WIN_W, WIN_H, screen);
 		adapt_map(screen);
 		mlx_expose_hook(screen->win, draw_reload, screen);

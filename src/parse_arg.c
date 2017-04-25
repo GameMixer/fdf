@@ -6,11 +6,40 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:52:00 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/18 15:10:21 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/20 13:18:12 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	get_min_max(t_map *map)
+{
+	int		i;
+	int		j;
+	int		k;
+	double	tmin;
+	double	tmax;
+
+	i = -1;
+	while (++i < map->len)
+	{
+		j = -1;
+		while (++j < map->lines[i]->len - 1)
+		{
+			k = j;
+			while (++k < map->lines[i]->len)
+			{
+				tmin = ft_min(map->lines[i]->points[j]->z,
+						map->lines[i]->points[k]->z);
+				tmax = ft_max(map->lines[i]->points[j]->z,
+						map->lines[i]->points[k]->z);
+				map->min = ft_min(tmin, map->min);
+				map->max = ft_max(tmax, map->max);
+				map->mid = (map->min + map->max) / 2;
+			}
+		}
+	}
+}
 
 int		ft_points(char *line, int nb_line, t_point ***array_points)
 {

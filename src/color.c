@@ -6,40 +6,11 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 14:42:20 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/19 16:02:20 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/20 14:21:10 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	get_min_max(t_map *map)
-{
-	int		i;
-	int		j;
-	int		k;
-	double	tmin;
-	double	tmax;
-
-	i = -1;
-	while (++i < map->len)
-	{
-		j = -1;
-		while (++j < map->lines[i]->len - 1)
-		{
-			k = j;
-			while (++k < map->lines[i]->len)
-			{
-				tmin = ft_min(map->lines[i]->points[j]->z,
-						map->lines[i]->points[k]->z);
-				tmax = ft_max(map->lines[i]->points[j]->z,
-						map->lines[i]->points[k]->z);
-				map->min = ft_min(tmin, map->min);
-				map->max = ft_max(tmax, map->max);
-				map->mid = (map->min + map->max) / 2;
-			}
-		}
-	}
-}
 
 int		find_color(t_color *spectrum, int z, double min, double max)
 {
@@ -64,17 +35,18 @@ int		find_color(t_color *spectrum, int z, double min, double max)
 	return (color);
 }
 
-int		get_color(t_win *screen, int color, t_point *p1)
+//int		get_color(t_win *screen, int color, t_point *p1)
+int		get_color(t_win *screen, t_point *p1, t_point *p2)
 {
 	t_color	c;
-	//int		color;
+	int		color;
 
 	if (out_window(p1) == 1)
 	{
-		//if (p2->color > p1->color)
-		//	color = p2->color;
-		//else
-		//	color = p1->color;
+		if (p2->color > p1->color)
+			color = p2->color;
+		else
+			color = p1->color;
 		if (color < screen->map->min || color > screen->map->max)
 			return (0);
 		if (color <= screen->map->mid && color >= screen->map->min)

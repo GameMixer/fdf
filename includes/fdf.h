@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:19:16 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/19 17:01:49 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/20 15:01:49 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define SCALE 1.0
 # define MOVE_ZOOM_IN (SCALE + ZOOM_AMOUNT)
 # define MOVE_ZOOM_OUT (SCALE - ZOOM_AMOUNT)
+# define LIMIT_ZOOM_IN 20.0
+# define LIMIT_ZOOM_OUT 0.015
 
 # define ROT_DEGREE 36
 # define MOVE_ROT_X_U -M_PI / ROT_DEGREE
@@ -176,6 +178,7 @@ typedef struct	s_matrix
 **	Parse argument and create a map
 **		parse_arg.c
 */
+void			get_min_max(t_map *map);
 t_map			*ft_parse_map(char *av, int fd);
 int				ft_row_num(char *map);
 int				ft_points(char *line, int nb_line, t_point ***array_points);
@@ -194,9 +197,9 @@ void			draw_map(t_win *screen);
 **	Make the map pretty with colors!!! Yay!!!
 **		color.c
 */
-void			get_min_max(t_map *map);
 int				find_color(t_color *spectrum, int z, double min, double max);
-int				get_color(t_win *screen, int color, t_point *p1);
+//int				get_color(t_win *screen, int color, t_point *p1);
+int				get_color(t_win *screen, t_point *p1, t_point *p2);
 int				*put_color(int a, int b, int c);
 int				**choose_color(void);
 
@@ -233,6 +236,13 @@ t_matrix		*matrix_shift(double tx, double ty, double tz);
 t_matrix		*matrix_scale(double scale);
 
 /*
+**	Displays controls and info for min, max, center, and theme.
+** 		display.c
+*/
+void			display_controls(t_win *pic);
+void			display_info(t_win *pic);
+
+/*
 **	Error display
 **		error.c
 */
@@ -245,6 +255,7 @@ void			fdf_arg_error(void);
 **	to name it with, so it will stay this way. I'm not good with names...
 **		util.c
 */
+char			*theme(int i);
 void			get_center(t_win *screen);
 //int				get_color(t_point *p1, t_point *p2);
 void			adapt_map(t_win *screen);

@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 17:13:39 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/19 17:11:21 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/20 12:21:21 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,19 @@ void	key_hook_scale(int keycode, t_win *screen)
 {
 	if (keycode == KEY_ZOOM_IN || keycode == KEY_ALT_ZOOM_IN)
 	{
-		calc_scale(screen, MOVE_ZOOM_IN);
 		screen->scale *= MOVE_ZOOM_IN;
+		if (screen->scale < LIMIT_ZOOM_IN)
+			calc_scale(screen, MOVE_ZOOM_IN);
+		else
+			screen->scale /= MOVE_ZOOM_IN;
 	}
 	else if (keycode == KEY_ZOOM_OUT || keycode == KEY_ALT_ZOOM_OUT)
 	{
-		calc_scale(screen, MOVE_ZOOM_OUT);
 		screen->scale *= MOVE_ZOOM_OUT;
+		if (screen->scale > LIMIT_ZOOM_OUT)
+			calc_scale(screen, MOVE_ZOOM_OUT);
+		else
+			screen->scale /= MOVE_ZOOM_OUT;
 	}
 }
 
