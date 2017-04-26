@@ -6,53 +6,28 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 15:05:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/25 17:46:09 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/26 14:24:42 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
-int		get_color(t_point *p1, t_point *p2)
-{
-	int	color;
-	int	z;
-
-	if (p2->color > p1->color)
-		z = p2->color;
-	else
-		z = p1->color;
-	if (z < -20)
-		color = PURPLE;
-	else if (z >= -20 && z < 0)
-		color = BLUE;
-	else if (z >= 0 && z < 10)
-		color = GREEN;
-	else if (z >= 10 && z < 20)
-		color = BROWN;
-	else if (z >= 20 && z < 50)
-		color = ORANGE;
-	else if (z >= 50 && z < 70)
-		color = RED;
-	else if (z >= 70)
-		color = WHITE;
-	else
-		color = BLACK;
-	return (color);
-}
-*/
 
 char	*theme(int i)
 {
 	if (i == 0)
-		return ("Black to white");
-	if (i == 1)
 		return ("RGB");
+	if (i == 1)
+		return ("Black to white");
 	if (i == 2)
 		return ("Lava");
 	if (i == 3)
-		return ("Red to white");
+		return ("Black to red");
 	if (i == 4)
 		return ("Island");
+	if (i == 5)
+		return ("Rouge");
+	if (i == 6)
+		return ("Hot and Cold");
 	return ("Mountain");
 }
 

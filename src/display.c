@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 14:14:42 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/20 15:01:25 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/26 15:57:15 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,58 @@ ____________________________\n\
 */
 }
 
+void	display_fill(t_win *pic, t_color *spectrum, int z, double bound)
+{
+	int		x;
+	int		color;
+	int		limit;
+	double	alpha;
+
+	alpha = 0;
+	limit = z + (SPEC_H / 2);
+	while (z < limit)
+	{
+		x = 0;
+		if ((pic->map->mid) > bound)
+			color = find_color(spectrum, ((bound * (1 - alpha)) + (pic->map->mid * alpha)), bound, pic->map->mid);
+		else
+			color = find_color(spectrum, ((pic->map->mid * (1 - alpha)) + (bound * alpha)), pic->map->mid, bound);
+		while (x < SPEC_W)
+		{
+			mlx_pixel_put(pic->mlx, pic->win, x + 420, SPEC_H + 10 - z, color);
+			x++;
+		}
+		alpha += 1.0 / (SPEC_H / 2);
+		z++;
+	}
+}
+
+void	display_spectrum(t_win *pic)
+{
+	int		z;
+	t_color	c;
+
+	z = 0;
+	c.c1 = pic->color[pic->cnum][0];
+	c.c2 = pic->color[pic->cnum][1];
+	display_fill(pic, &c, z, pic->map->min);
+	c.c1 = pic->color[pic->cnum][1];
+	c.c2 = pic->color[pic->cnum][2];
+	display_fill(pic, &c, z + (SPEC_H / 2), pic->map->max);
+	mlx_string_put(pic->mlx, pic->win, 432 + SPEC_W, 10,
+			pic->color[pic->cnum][2], "MAX: ");
+	mlx_string_put(pic->mlx, pic->win, 492 + SPEC_W, 10,
+			pic->color[pic->cnum][2], ft_itoa(pic->map->max));
+	mlx_string_put(pic->mlx, pic->win, 432 + SPEC_W, SPEC_H - 2,
+			pic->color[pic->cnum][0], "MIN: ");
+	mlx_string_put(pic->mlx, pic->win, 492 + SPEC_W, SPEC_H - 2,
+			pic->color[pic->cnum][0], ft_itoa(pic->map->min));
+}
+
 void	display_info(t_win *pic)
 {
 	display_controls(pic);
+	display_spectrum(pic);
 	mlx_string_put(pic->mlx, pic->win, 10, WIN_H - 59,
 			pic->color[pic->cnum][1], "MIN   : ");
 	mlx_string_put(pic->mlx, pic->win, 94, WIN_H - 59,

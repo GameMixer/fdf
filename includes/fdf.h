@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:19:16 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/25 17:47:19 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/26 15:45:28 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 
 # define WIN_W 1920
 # define WIN_H 1080
+
+# define SPEC_W 25
+# define SPEC_H 150
 
 /*
 ** Move pixel
@@ -78,44 +81,17 @@
 # define KEY_COLOR_D 43
 
 /*
-** Colors
+** Specific colors
 */
-/*
-# define TEAL 0x008080
-# define CYAN 0x00FFFF
-# define PURPLE 0x800080
-# define INDIGO 0x4B0082
-# define MAGENTA 0xFF00FF
-# define DEEPSKYBLUE 0x00BFFF
-# define BLUE 0x0000FF
 # define SCIBLUE 0x0066CC
-# define NAVY 0x000080
-# define BROWN 0xA52A2A
-# define TAN 0xD2B48C
-# define PINK 0xFFC0CB
-# define HOTPINK 0xFF69B4
-# define RED 0xFF0000
-# define CRIMSON 0xDC143C
-# define MAROON 0x800000
-# define ORANGERED 0xFF4500
-# define ORANGE 0xFF8000
-# define CREAMCAN 0xF3D85E
-# define YELLOW 0xFFFF00
-# define TURQUOISE 0x40E0D0
-# define AQUAMARINE 0x7FFFD4
-# define EMERALD 0x00C957
-# define MINT 0xBDFCC9
-# define OLIVE 0x808000
-# define LIME 0x00FF00
-# define GREEN 0x008000
-# define IVORYBLACK 0x292421
-# define WHITE 0xFFFFFF
-# define SILVER 0xC0C0C0
-# define GRAY 0x808080
-# define BLACK 0x000000
-*/
+# define CREAMCAN 0xF5D85C
+# define VIVIDTANGERINE 0xFF9980
+# define ROSEWOOD 0x630000
+# define TALLPOPPY 0xB32D29
+# define PARSLEY 0x134F19
+# define GONDOLA 0x261414
 
-# define THEMES 5
+# define THEMES 8
 
 typedef struct	s_color
 {
@@ -202,8 +178,7 @@ void			draw_map(t_win *screen);
 **		color.c
 */
 int				find_color(t_color *spectrum, int z, double min, double max);
-//int				get_color(t_win *screen, int color, t_point *p1);
-int				get_color(t_win *screen, t_point *p1, t_point *p2);
+int				get_color(t_win *pic, t_point *p1, t_point *p2, double alpha);
 int				*put_color(int a, int b, int c);
 int				**choose_color(void);
 
@@ -244,6 +219,8 @@ t_matrix		*matrix_scale(double scale);
 ** 		display.c
 */
 void			display_controls(t_win *pic);
+void			display_fill(t_win *pic, t_color *spectrum, int z, double bound);
+void			display_spectrum(t_win *pic);
 void			display_info(t_win *pic);
 
 /*
@@ -261,7 +238,6 @@ void			fdf_arg_error(void);
 */
 char			*theme(int i);
 void			get_center(t_win *screen);
-//int				get_color(t_point *p1, t_point *p2);
 void			adapt_map(t_win *screen);
 int				draw_reload(t_win *screen);
 int				out_window(t_point *point);
