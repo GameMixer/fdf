@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:52:00 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/20 13:18:12 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/25 17:48:59 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	get_min_max(t_map *map)
 			k = j;
 			while (++k < map->lines[i]->len)
 			{
-				tmin = ft_min(map->lines[i]->points[j]->z,
-						map->lines[i]->points[k]->z);
-				tmax = ft_max(map->lines[i]->points[j]->z,
-						map->lines[i]->points[k]->z);
+				tmin = ft_min(map->lines[i]->points[j]->z / SIZE_ALT,
+						map->lines[i]->points[k]->z / SIZE_ALT);
+				tmax = ft_max(map->lines[i]->points[j]->z / SIZE_ALT,
+						map->lines[i]->points[k]->z / SIZE_ALT);
 				map->min = ft_min(tmin, map->min);
 				map->max = ft_max(tmax, map->max);
 				map->mid = (map->min + map->max) / 2;
@@ -62,6 +62,7 @@ int		ft_points(char *line, int nb_line, t_point ***array_points)
 		point->y = nb_line * SIZE_H;
 		point->z = ft_atoi(str_array[i]);
 		point->color = point->z;
+		point->z = (point->z) * SIZE_ALT;
 		(*array_points)[i] = point;
 		i++;
 	}

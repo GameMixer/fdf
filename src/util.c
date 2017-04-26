@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 15:05:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/20 15:01:40 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/25 17:46:09 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int		draw_reload(t_win *screen)
 	screen->img_addr = mlx_get_data_addr(screen->img,
 			&(screen->bits), &(screen->size), &(screen->endian));
 	draw_map(screen);
-	display_info(screen);
 	mlx_put_image_to_window(screen->mlx, screen->win, screen->img, 0, 0);
+	display_info(screen);
 	mlx_destroy_image(screen->mlx, screen->img);
 	return (0);
 }

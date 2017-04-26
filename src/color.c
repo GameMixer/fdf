@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 14:42:20 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/20 14:21:10 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/25 14:33:41 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int		**choose_color(void)
 	color = malloc(sizeof(int *) * THEMES);
 	color[0] = put_color(BLACK, GRAY, WHITE);
 	color[1] = put_color(BLUE, LIME, RED);
-	color[2] = put_color(RED, ORANGE, YELLOW);
-	color[3] = put_color(RED, PINK, WHITE);
-	color[4] = put_color(SCIBLUE, DEEPSKYBLUE, CREAMCAN);
+	color[2] = put_color(RED2, ORANGERED, GOLD);
+	color[3] = put_color(RED, LITPINK1, WHITE);
+	color[4] = put_color(DEEPSKYBLUE3, DEEPSKYBLUE, GOLDENROD);
 	return (color);
 }

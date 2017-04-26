@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:19:16 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/20 15:01:49 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/25 17:47:19 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "get_next_line.h"
+# include "colors.h"
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
@@ -22,6 +23,7 @@
 
 # define SIZE_W 20
 # define SIZE_H 20
+# define SIZE_ALT 10
 
 # define WIN_W 1920
 # define WIN_H 1080
@@ -78,6 +80,7 @@
 /*
 ** Colors
 */
+/*
 # define TEAL 0x008080
 # define CYAN 0x00FFFF
 # define PURPLE 0x800080
@@ -110,6 +113,7 @@
 # define SILVER 0xC0C0C0
 # define GRAY 0x808080
 # define BLACK 0x000000
+*/
 
 # define THEMES 5
 
