@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 14:14:42 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/26 15:57:15 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/27 15:22:36 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,21 @@ void	display_fill(t_win *pic, t_color *spectrum, int z, double bound)
 
 	alpha = 0;
 	limit = z + (SPEC_H / 2);
-	while (z < limit)
+	while (z <= limit)
 	{
 		x = 0;
 		if ((pic->map->mid) > bound)
-			color = find_color(spectrum, ((bound * (1 - alpha)) + (pic->map->mid * alpha)), bound, pic->map->mid);
+			color = find_color(spectrum, ((bound * (1 - alpha)) +
+						(pic->map->mid * alpha)), bound, pic->map->mid);
 		else
-			color = find_color(spectrum, ((pic->map->mid * (1 - alpha)) + (bound * alpha)), pic->map->mid, bound);
+			color = find_color(spectrum, ((pic->map->mid * (1 - alpha)) +
+						(bound * alpha)), pic->map->mid, bound);
 		while (x < SPEC_W)
 		{
 			mlx_pixel_put(pic->mlx, pic->win, x + 420, SPEC_H + 10 - z, color);
 			x++;
 		}
-		alpha += 1.0 / (SPEC_H / 2);
+		alpha += 1.0 / ((SPEC_H / 2) - 1);
 		z++;
 	}
 }

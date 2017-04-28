@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 14:42:20 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/26 14:24:25 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/27 13:04:26 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int		**choose_color(void)
 	color[0] = put_color(BLUE, LIME, RED);
 	color[1] = put_color(BLACK, GRAY, WHITE);
 	color[2] = put_color(RED2, ORANGERED, GOLD);
-	color[3] = put_color(GONDOLA, MAROON, RED2);
+	color[3] = put_color(BLACK, MAROON, RED2);
 	color[4] = put_color(SCIBLUE, DEEPSKYBLUE, CREAMCAN);
 	color[5] = put_color(VIVIDTANGERINE, FIREBRICK3, ROSEWOOD);
-	color[6] = put_color(TALLPOPPY, IVORYBLACK, LITSKYBLUE3);
+	color[6] = put_color(RED, PURPLE, BLUE);
 	color[7] = put_color(PARSLEY, GONDOLA, SNOW3);
 	return (color);
 }

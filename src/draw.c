@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 14:06:14 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/26 12:30:33 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:16:57 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ void	draw_params(t_point *p1, t_point *p2, double *params)
 		params[4] = params[0] * 0.5;
 	else
 		params[4] = -params[2] * 0.5;
-	if (ft_max(params[0], params[2]))
-		params[6] = 1 / (double)(ft_max(params[0], params[2]));
+	if (ft_max(params[0], params[2]) > 1)
+		params[5] = 1 / (double)(ft_max(params[0], params[2]) - 1);
+	else if (ft_max(params[0], params[2]) == 1)
+		params[5] = 1;
 	else
-		params[6] = 0;
-	params[7] = 0;
+		params[5] = 0;
+	params[6] = 0;
 }
 
 void	draw_point(t_point *point, t_win *screen, int color)
@@ -51,21 +53,23 @@ void	draw_line(t_point p1, t_point p2, t_win *screen)
 	int		flag;
 
 	draw_params(&p1, &p2, params);
+	printf("Params created...\n");
 	flag = 1;
 	if (out_window(&p1) || out_window(&p2))
 		while (flag && !((int)p1.x == (int)p2.x && (int)p1.y == (int)p2.y))
 		{
-			draw_point(&p1, screen, get_color(screen, &p1, &p2, params[7]));
-			params[7] += params[6];
-			params[5] = params[4];
+			draw_point(&p1, screen, get_color(screen, &p1, &p2, params[6]));
+			printf("Point (%d, %d) drawn...\n", (int)p1.x, (int)p1.y);
+			params[6] += params[5];
+			params[7] = params[4];
 			flag = 0;
-			if (params[5] > -params[0] && (int)p1.x != (int)p2.x)
+			if (params[7] > -params[0] && (int)p1.x != (int)p2.x)
 			{
 				params[4] -= params[2];
 				p1.x += params[1];
 				flag = 1;
 			}
-			if (params[5] < params[2] && (int)p1.y != (int)p2.y)
+			if (params[7] < params[2] && (int)p1.y != (int)p2.y)
 			{
 				params[4] += params[0];
 				p1.y += params[3];
@@ -86,13 +90,20 @@ void	draw_map(t_win *scr)
 		x = 0;
 		while (x < (scr->map->lines[y]->len))
 		{
+			printf("Drawing line %d from point %d...\n", y, x);
+			//printf("(%f, %f, %f)\n", scr->map->lines[y]->points[x]->x, scr->map->lines[y]->points[x]->y, scr->map->lines[y]->points[x]->z);
 			p1 = (*scr->map->lines[y]->points[x]);
 			if (scr->map->lines[y]->points[x + 1])
+			{
+				//printf("to (%f, %f, %f)\n", scr->map->lines[y]->points[x+1]->x, scr->map->lines[y]->points[x+1]->y, scr->map->lines[y]->points[x+1]->z);
 				draw_line(p1, (*scr->map->lines[y]->points[x + 1]), scr);
+			}
 			if (scr->map->lines[y + 1])
-				if (scr->map->lines[y + 1]->points[x] &&
-						x <= scr->map->lines[y + 1]->len)
+				if (scr->map->lines[y + 1]->points[x] && x <= scr->map->lines[y + 1]->len) 
+				{
+					//printf("and (%f, %f, %f)\n", scr->map->lines[y+1]->points[x]->x, scr->map->lines[y+1]->points[x]->y, scr->map->lines[y+1]->points[x]->z);
 					draw_line(p1, (*scr->map->lines[y + 1]->points[x]), scr);
+				}
 			x++;
 		}
 		y++;

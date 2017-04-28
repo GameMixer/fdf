@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:52:00 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/25 15:10:31 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/27 11:32:26 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ int		ft_points(char *line, int nb_line, t_point ***array_points)
 			fdf_malloc_error();
 		point->x = i * SIZE_W;
 		point->y = nb_line * SIZE_H;
-		point->z = ft_atoi(str_array[i]);
-		point->color = point->z;
-		point->z = (point->z) * SIZE_ALT;
+		point->color = ft_atoi(str_array[i]);
+		point->z = (point->color) * SIZE_ALT;
 		(*array_points)[i] = point;
 		i++;
 	}

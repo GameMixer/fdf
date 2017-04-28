@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:19:16 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/26 15:45:28 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:04:57 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,22 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdio.h>
+# include <limits.h>
 
 # define SIZE_W 20
 # define SIZE_H 20
-# define SIZE_ALT 10
+# define SIZE_ALT 5
 
 # define WIN_W 1920
 # define WIN_H 1080
 
 # define SPEC_W 25
-# define SPEC_H 150
+# define SPEC_H 200
 
 /*
 ** Move pixel
 */
-# define SHIFT_DIST 100
+# define SHIFT_DIST 20
 # define MOVE_UP -SHIFT_DIST
 # define MOVE_DOWN SHIFT_DIST
 # define MOVE_LEFT -SHIFT_DIST
