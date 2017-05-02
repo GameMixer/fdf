@@ -6,7 +6,7 @@
 /*   By: gderenzi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 15:05:59 by gderenzi          #+#    #+#             */
-/*   Updated: 2017/04/27 17:23:45 by gderenzi         ###   ########.fr       */
+/*   Updated: 2017/05/02 13:46:15 by gderenzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,8 @@ int		draw_reload(t_win *screen)
 	screen->img = mlx_new_image(screen->mlx, WIN_W + 100, WIN_H + 100);
 	screen->img_addr = mlx_get_data_addr(screen->img,
 			&(screen->bits), &(screen->size), &(screen->endian));
-	printf("Drawing map...\n");
 	draw_map(screen);
-	printf("Putting image to window...\n");
 	mlx_put_image_to_window(screen->mlx, screen->win, screen->img, 0, 0);
-	printf("Displaying info...\n");
 	display_info(screen);
 	mlx_destroy_image(screen->mlx, screen->img);
 	return (0);
@@ -80,8 +77,8 @@ void	adapt_map(t_win *screen)
 		s = h / (screen->center.y);
 	calc_shift(screen, -screen->center.x + w, -screen->center.y + h, 0);
 	calc_scale(screen, s);
-	//calc_rotation(screen, M_PI / 15, 'z');
-	//calc_rotation(screen, M_PI / 5, 'x');
+	calc_rotation(screen, M_PI / 15, 'z');
+	calc_rotation(screen, M_PI / 5, 'x');
 	screen->scale = s;
 }
 
